@@ -1,8 +1,9 @@
 import pandas as pd
-
+from memory_profiler import profile
 from typing import List, Tuple
 from datetime import datetime
 
+@profile
 def q1_time(file_path: str) -> List[Tuple[datetime.date, str]]:
     # Lee el archivo json
     df_tweets_source = pd.read_json(file_path, lines=True)

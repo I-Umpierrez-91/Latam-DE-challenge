@@ -1,11 +1,8 @@
 from typing import List, Tuple
 from datetime import datetime
 
-def q1_time(file_path: str) -> List[Tuple[datetime.date, str]]:
+def q1_time(GCPclient) -> List[Tuple[datetime.date, str]]:
     
-
-    # Crea un cliente de BigQuery
-    client = bigquery.Client.from_service_account_json(keyfile_path, project=project_id)
     # La consulta SQL para bigquery funciona de la siguiente manera:
     # Cuenta la cantidad de tweets por usuario por día y tambien la cantidad total por dia.
     # Hago rank de los usuarios por cantidad de tweets por dia. Uso RoW_NUMBER() para que no haya empates.
@@ -32,7 +29,7 @@ def q1_time(file_path: str) -> List[Tuple[datetime.date, str]]:
     """
 
     # Ejecuta la consulta
-    query_job = client.query(query)
+    query_job = GCPclient.query(query)
     # Convierte el RowIterator en una lista de tuplas
     result_tuple = [tuple(row.values()) for row in query_job.result()]
 
