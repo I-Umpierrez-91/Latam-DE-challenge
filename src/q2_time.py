@@ -9,8 +9,8 @@ def q2_time(file_path: str) -> List[Tuple[str, int]]:
     extract_emoji = re.compile(emoji_rx)
 
     # Uno todos los tweets en un solo string y extraigo los emojis.
-    out = ' '.join(f_tweets_source['content'])
-    emojis = pd.DataFrame(re.findall(extract_emoji, out))
+    all_tweets = ' '.join(f_tweets_source['content'])
+    emojis = pd.DataFrame(re.findall(extract_emoji, all_tweets))
 
     # Agrupo por emoji y cuento la cantidad de ocurrencias.
     top_10_items = emojis.groupby(emojis[0]).size().reset_index(name='counts').sort_values('counts', ascending=False).head(10).to_records(index=False)

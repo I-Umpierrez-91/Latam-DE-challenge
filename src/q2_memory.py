@@ -11,6 +11,7 @@ def q2_memory(file_path: str) -> List[Tuple[str, int]]:
     # Diccionario para mantener los emojis.
     emojis = {}
 
+    # Leo el archivo json un chunk a la vez. Para cada tweet, extraigo los emojis y los agrego al diccionario.
     json_reader = pd.read_json(file_path, lines=True, chunksize=batch_size)
     for chunk in json_reader:
         for tweet in chunk['content']:
@@ -19,10 +20,10 @@ def q2_memory(file_path: str) -> List[Tuple[str, int]]:
                     emojis[emoji] += 1
                 else:
                     emojis[emoji] = 1
-    # Sort the dictionary by values in descending order
+    # Ordeno el diccionario por valor.
     sorted_dict = dict(sorted(emojis.items(), key=lambda item: item[1], reverse=True))
 
-    # Get the top 10 items
+    # Obtengo los 10 primeros emojis.
     top_10_items = dict(list(sorted_dict.items())[:10])
 
     result_tuple = list(top_10_items.items())
